@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "SecondLook — Everyday Digital Safety",
+  "short_name": "SecondLook",
+  "description": "Private message and link checks, a password maker, and everyday digital safety steps.",
+  "lang": "en",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f7f2",
+  "theme_color": "#182e27",
+  "icons": [
+    { "src": "./assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

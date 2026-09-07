@@ -1,0 +1,15 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+__pycache__/
+.pytest_cache/
+coverage/
+playwright-report/
+test-results/
+*.log
+artifacts/
+SecondLook-preview.html
+SecondLook-github-ready.zip
