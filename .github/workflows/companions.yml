@@ -47,7 +47,7 @@ jobs:
         run: ./gradlew --no-daemon --max-workers=2 :app:testDebugUnitTest :app:assemblePreview :app:lintPreview
       - name: Inspect the actual preview APK
         run: python3 scripts/verify-android-apk.py
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: SecondLook-Android-preview-nondebuggable
           path: companions/android/app/build/outputs/apk/preview/*.apk
@@ -81,7 +81,7 @@ jobs:
       - name: Build app and extensions; run native unit tests
         working-directory: companions/ios
         run: xcodebuild -project SecondLook.xcodeproj -scheme SecondLook -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -derivedDataPath "$RUNNER_TEMP/SecondLookDerivedData" CODE_SIGNING_ALLOWED=NO test
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: SecondLook-iPhone-simulator-build-NOT-installable-on-a-phone
           path: ${{ runner.temp }}/SecondLookDerivedData/Build/Products/Debug-iphonesimulator/SecondLook.app
