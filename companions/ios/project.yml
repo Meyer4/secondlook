@@ -1,0 +1,106 @@
+name: SecondLook
+options:
+  bundleIdPrefix: io.github.meyer4
+  deploymentTarget:
+    iOS: '17.0'
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    IPHONEOS_DEPLOYMENT_TARGET: '17.0'
+    CURRENT_PROJECT_VERSION: '110'
+    MARKETING_VERSION: '1.1.0'
+    TARGETED_DEVICE_FAMILY: '1,2'
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+targets:
+  SecondLook:
+    type: application
+    platform: iOS
+    sources:
+      - path: SecondLook
+        excludes: [Info.plist]
+      - path: Shared
+    info:
+      path: SecondLook/Info.plist
+      properties:
+        CFBundleDisplayName: SecondLook
+        UILaunchScreen: {}
+        UIFileSharingEnabled: false
+        UIApplicationSupportsIndirectInputEvents: true
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.meyer4.secondlook.ios
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    dependencies:
+      - target: SecondLookShare
+        embed: true
+      - target: SecondLookSafari
+        embed: true
+  SecondLookShare:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ShareExtension
+        excludes: [Info.plist]
+      - path: Shared
+    info:
+      path: ShareExtension/Info.plist
+      properties:
+        CFBundleDisplayName: Check with SecondLook
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.share-services
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShareViewController
+          NSExtensionAttributes:
+            NSExtensionActivationRule:
+              NSExtensionActivationSupportsText: true
+              NSExtensionActivationSupportsWebURLWithMaxCount: 1
+              NSExtensionActivationSupportsWebPageWithMaxCount: 1
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.meyer4.secondlook.ios.share
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+  SecondLookSafari:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Shared/PrivacyInfo.xcprivacy
+        buildPhase: resources
+      - path: SafariExtension/SafariWebExtensionHandler.swift
+      - path: SafariExtension/Resources
+        type: folder
+        buildPhase: resources
+    info:
+      path: SafariExtension/Info.plist
+      properties:
+        CFBundleDisplayName: SecondLook Link Guard
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.Safari.web-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).SafariWebExtensionHandler
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.meyer4.secondlook.ios.safari
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+    dependencies:
+      - sdk: SafariServices.framework
+  SecondLookTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+      - path: Shared/rules.json
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.meyer4.secondlook.ios.tests
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: SecondLook
+schemes:
+  SecondLook:
+    build:
+      targets:
+        SecondLook: all
+    test:
+      targets: [SecondLookTests]

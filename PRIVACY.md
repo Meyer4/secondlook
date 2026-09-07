@@ -32,3 +32,7 @@ The app’s copied report omits the original message, full URLs, and quoted matc
 ## Changes
 
 This policy describes the supplied version 1 implementation. If an owner adds a backend, analytics, user accounts, reputation APIs, error telemetry, or remote fonts, they must update the implementation and disclosures before claiming the same privacy behaviour.
+
+## Optional companion apps
+
+The Android, Chrome/Edge, and iPhone/Safari previews have distinct permission models. They are separate installations, not background powers added to the website. Read [companions/README.md](companions/README.md) for the allowlist defaults, in-memory deduplication, transient reports, native settings, clipboard controls, and platform limits. No companion is designed to upload input or keep message/browsing history. Device software, browsers, stores, and hosting providers have their own policies.

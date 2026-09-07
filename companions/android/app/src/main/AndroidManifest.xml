@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <!-- Intentionally NO INTERNET, SMS, contacts, accessibility, foreground-service,
+         wake-lock, or sensitive-notification permission. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <queries><package android:name="com.whatsapp"/><package android:name="com.whatsapp.w4b"/><package android:name="com.facebook.orca"/><package android:name="com.facebook.katana"/><package android:name="org.telegram.messenger"/><package android:name="org.telegram.messenger.web"/><package android:name="com.instagram.android"/><package android:name="com.google.android.apps.messaging"/><package android:name="com.samsung.android.messaging"/><package android:name="com.android.mms"/></queries>
+    <application android:name=".SecondLookApp" android:label="SecondLook" android:theme="@style/AppTheme" android:icon="@drawable/ic_eye" android:allowBackup="false" android:dataExtractionRules="@xml/data_extraction_rules" tools:targetApi="31" android:supportsRtl="true" android:usesCleartextTraffic="false">
+        <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTop">
+            <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+            <intent-filter><action android:name="android.intent.action.SEND"/><category android:name="android.intent.category.DEFAULT"/><data android:mimeType="text/plain"/></intent-filter>
+            <intent-filter><action android:name="android.intent.action.PROCESS_TEXT"/><category android:name="android.intent.category.DEFAULT"/><data android:mimeType="text/plain"/></intent-filter>
+        </activity>
+        <activity android:name=".AlertActivity" android:exported="false"/>
+        <service android:name=".SecondLookListener" android:label="SecondLook notification checks" android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" android:exported="true">
+            <intent-filter><action android:name="android.service.notification.NotificationListenerService"/></intent-filter>
+        </service>
+    </application>
+</manifest>

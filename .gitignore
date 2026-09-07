@@ -13,3 +13,19 @@ test-results/
 artifacts/
 SecondLook-preview.html
 SecondLook-github-ready.zip
+
+.gradle/
+local.properties
+*.jks
+*.keystore
+releases/
+companions/ios/*.xcodeproj/
+DerivedData/
+
+# Native generated files and signing material
+build/
+.idea/
+*.p12
+*.mobileprovision
+*.xcuserstate
+xcuserdata/

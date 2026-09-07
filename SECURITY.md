@@ -53,3 +53,7 @@ Reports about missed patterns or false positives should use **fictional or thoro
 - Review local safety guidance and any domain reference lists periodically.
 - Re-run browser and accessibility checks and verify additional browsers before a broad release.
 - Never place an API key in client code. Optional remote reputation features would need an explicit consent flow and a revised threat model.
+
+## Companion preview security
+
+Version 1.1 adds separate opt-in companions; see [their threat boundaries](companions/README.md) and [verification record](companions/VERIFICATION.md). A notification listener, DOM overlay, or Share extension is not universal interception. Preview APKs are debug/test-signed, not production-signed or store-reviewed. No signing secrets are included. Establish owner-controlled signing and independently review the implementation before distributing it as a mature security product.

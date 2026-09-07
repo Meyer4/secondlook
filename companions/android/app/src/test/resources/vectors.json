@@ -1,0 +1,262 @@
+[
+  {
+    "id": "shared-1",
+    "kind": "message",
+    "input": "Meet me at the library at three.",
+    "level": "unknown",
+    "signalIds": []
+  },
+  {
+    "id": "shared-2",
+    "kind": "message",
+    "input": "Please send me your OTP.",
+    "level": "high",
+    "signalIds": [
+      "security-code"
+    ]
+  },
+  {
+    "id": "shared-3",
+    "kind": "message",
+    "input": "Never share your OTP with anyone.",
+    "level": "unknown",
+    "signalIds": []
+  },
+  {
+    "id": "shared-4",
+    "kind": "message",
+    "input": "Do not send your password to a stranger.",
+    "level": "unknown",
+    "signalIds": []
+  },
+  {
+    "id": "shared-5",
+    "kind": "message",
+    "input": "Never share your OTP. Please send your OTP to us.",
+    "level": "high",
+    "signalIds": [
+      "security-code"
+    ]
+  },
+  {
+    "id": "shared-6",
+    "kind": "message",
+    "input": "Please pay a redelivery fee today.",
+    "level": "high",
+    "signalIds": [
+      "urgency",
+      "advance-fee"
+    ]
+  },
+  {
+    "id": "shared-7",
+    "kind": "message",
+    "input": "I sent money to your account by mistake. Don’t call customer care.",
+    "level": "high",
+    "signalIds": [
+      "mistaken-deposit",
+      "avoid-verification"
+    ]
+  },
+  {
+    "id": "shared-8",
+    "kind": "message",
+    "input": "Please buy gift cards to pay this fine.",
+    "level": "high",
+    "signalIds": [
+      "unusual-payment"
+    ]
+  },
+  {
+    "id": "shared-9",
+    "kind": "message",
+    "input": "Double your money with guaranteed profit.",
+    "level": "high",
+    "signalIds": [
+      "guaranteed-return"
+    ]
+  },
+  {
+    "id": "shared-10",
+    "kind": "message",
+    "input": "Install AnyDesk to fix your bank account.",
+    "level": "high",
+    "signalIds": [
+      "remote-access"
+    ]
+  },
+  {
+    "id": "shared-11",
+    "kind": "message",
+    "input": "Please reply immediately about class.",
+    "level": "caution",
+    "signalIds": [
+      "urgency"
+    ]
+  },
+  {
+    "id": "shared-12",
+    "kind": "message",
+    "input": "Please enter your card details here.",
+    "level": "caution",
+    "signalIds": [
+      "card-details"
+    ]
+  },
+  {
+    "id": "shared-13",
+    "kind": "message",
+    "input": "This is my new number and I need money.",
+    "level": "caution",
+    "signalIds": [
+      "new-number"
+    ]
+  },
+  {
+    "id": "shared-14",
+    "kind": "message",
+    "input": "Please look at https://paypal.com@wrong.example/account",
+    "level": "high",
+    "signalIds": [
+      "link-0-userinfo"
+    ]
+  },
+  {
+    "id": "shared-15",
+    "kind": "link",
+    "input": "https://example.com/path",
+    "level": "unknown",
+    "signalIds": []
+  },
+  {
+    "id": "shared-16",
+    "kind": "link",
+    "input": "http://example.com",
+    "level": "caution",
+    "signalIds": [
+      "unencrypted"
+    ]
+  },
+  {
+    "id": "shared-17",
+    "kind": "link",
+    "input": "example.com/path",
+    "level": "unknown",
+    "signalIds": []
+  },
+  {
+    "id": "shared-18",
+    "kind": "link",
+    "input": "https://paypal.com@verify-wallet.example/login",
+    "level": "high",
+    "signalIds": [
+      "userinfo"
+    ]
+  },
+  {
+    "id": "shared-19",
+    "kind": "link",
+    "input": "https://bit.ly/example",
+    "level": "caution",
+    "signalIds": [
+      "shortener"
+    ]
+  },
+  {
+    "id": "shared-20",
+    "kind": "link",
+    "input": "https://support.google.com",
+    "level": "unknown",
+    "signalIds": []
+  },
+  {
+    "id": "shared-21",
+    "kind": "link",
+    "input": "https://paypal.com.billing.example",
+    "level": "caution",
+    "signalIds": [
+      "brand-paypal"
+    ]
+  },
+  {
+    "id": "shared-22",
+    "kind": "link",
+    "input": "https://secure-paypal-login.example",
+    "level": "caution",
+    "signalIds": [
+      "brand-paypal"
+    ]
+  },
+  {
+    "id": "shared-23",
+    "kind": "link",
+    "input": "https://example.com/update.apk",
+    "level": "high",
+    "signalIds": [
+      "download"
+    ]
+  },
+  {
+    "id": "shared-24",
+    "kind": "link",
+    "input": "https://example.com/update%2Eexe",
+    "level": "high",
+    "signalIds": [
+      "download"
+    ]
+  },
+  {
+    "id": "shared-25",
+    "kind": "link",
+    "input": "https://127.0.0.1",
+    "level": "caution",
+    "signalIds": [
+      "ip-host"
+    ]
+  },
+  {
+    "id": "shared-26",
+    "kind": "link",
+    "input": "https://[::1]",
+    "level": "caution",
+    "signalIds": [
+      "ip-host"
+    ]
+  },
+  {
+    "id": "shared-27",
+    "kind": "link",
+    "input": "javascript:alert(1)",
+    "level": "high",
+    "signalIds": [
+      "non-web-scheme"
+    ]
+  },
+  {
+    "id": "shared-28",
+    "kind": "link",
+    "input": "https://example.com/login?next=https%3A%2F%2Fother.example%2F",
+    "level": "caution",
+    "signalIds": [
+      "possible-redirect"
+    ]
+  },
+  {
+    "id": "shared-29",
+    "kind": "link",
+    "input": "https://printer.local",
+    "level": "caution",
+    "signalIds": [
+      "local-host"
+    ]
+  },
+  {
+    "id": "shared-30",
+    "kind": "link",
+    "input": "https://xn--pple-43d.com",
+    "level": "caution",
+    "signalIds": [
+      "international-domain"
+    ]
+  }
+]

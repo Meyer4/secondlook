@@ -1,0 +1,273 @@
+{
+  "version": "1.1.0",
+  "messageRules": [
+    {
+      "id": "security-code",
+      "severity": "high",
+      "pattern": "\\b(?:send|share|tell|give|reply\\s+with|forward|provide)\\b[^.!?\\n]{0,55}\\b(?:otp|one[- ]time\\s+(?:code|password|pin)|verification\\s+code|security\\s+code|login\\s+code|password|pin|recovery\\s+(?:code|phrase)|seed\\s+phrase)\\b",
+      "skipNegated": true,
+      "title": "A request for a secret",
+      "detail": "A password, PIN, recovery phrase, or one-time code can give someone access to your account. Do not send it to another person. Use codes only in an official sign-in flow you started."
+    },
+    {
+      "id": "card-details",
+      "severity": "medium",
+      "pattern": "\\b(?:enter|update|confirm|send|share|provide|verify)\\b[^.!?\\n]{0,40}\\b(?:card\\s+(?:details|number)|credit\\s+card|debit\\s+card|bank\\s+details|cvv)\\b",
+      "skipNegated": true,
+      "title": "A request for financial details",
+      "detail": "Requests to submit card or bank details deserve an independent check. Open the provider’s official app or type its known address yourself instead of following the message."
+    },
+    {
+      "id": "urgency",
+      "severity": "medium",
+      "pattern": "\\b(?:urgent(?:ly)?|act\\s+now|immediately|last\\s+chance|final\\s+(?:warning|notice)|within\\s+\\d+\\s+(?:minutes?|hours?)|account\\s+(?:will\\s+be\\s+)?(?:suspended|locked|closed)|(?:pay|respond|reply|verify)[^.!?\\n]{0,35}(?:or\\s+(?:else|it\\s+will)|today))\\b",
+      "skipNegated": false,
+      "title": "Pressure to act quickly",
+      "detail": "Urgency can stop you from checking the facts. A deadline alone does not prove a scam, but take time to verify a financial or account-related request independently."
+    },
+    {
+      "id": "advance-fee",
+      "severity": "high",
+      "pattern": "\\b(?:(?:pay|send|transfer)[^.!?\\n]{0,45}(?:release\\s+fee|processing\\s+fee|redelivery\\s+fee|delivery\\s+fee|unlock\\s+(?:your\\s+)?(?:prize|funds|money))|(?:won|winner|prize|lottery|inheritance)[^.!?\\n]{0,100}(?:fee|deposit|pay\\b))\\b",
+      "skipNegated": true,
+      "title": "A fee before you receive something",
+      "detail": "Unexpected fees to release a prize, delivery, or funds are a common scam pattern. If you expect a parcel, check inside the delivery company’s official service—not through this message."
+    },
+    {
+      "id": "unusual-payment",
+      "severity": "high",
+      "pattern": "\\b(?:pay|send|buy|purchase|transfer)[^.!?\\n]{0,50}\\b(?:gift\\s*cards?|voucher\\s+codes?|bitcoin|crypto(?:currency)?|usdt)\\b",
+      "skipNegated": true,
+      "title": "A hard-to-reverse payment request",
+      "detail": "Scammers often ask for gift-card codes or cryptocurrency because recovery can be difficult. The payment method alone is not proof; independently verify who is asking and why."
+    },
+    {
+      "id": "guaranteed-return",
+      "severity": "high",
+      "pattern": "\\b(?:guaranteed\\s+(?:profit|returns?|income)|risk[- ]free\\s+(?:investment|profit)|double\\s+your\\s+(?:money|investment)|(?:earn|make|get)\\s+\\d+%\\s+(?:daily|per\\s+day|a\\s+day))\\b",
+      "skipNegated": true,
+      "title": "An unrealistic investment promise",
+      "detail": "Guaranteed high returns and pressure to invest are major warning signs. Check any provider with your local financial regulator before sending money."
+    },
+    {
+      "id": "remote-access",
+      "severity": "high",
+      "pattern": "\\b(?:(?:install|download|open|use)[^.!?\\n]{0,45}(?:anydesk|teamviewer|remote\\s+(?:access|desktop)|support\\s+app)|(?:allow|give|grant)[^.!?\\n]{0,30}remote\\s+access)\\b",
+      "skipNegated": true,
+      "title": "A request to access your device",
+      "detail": "Remote-access software can let another person control your device. Do not install or grant access because of an unexpected support message. Contact support through a channel you trust."
+    },
+    {
+      "id": "mistaken-deposit",
+      "severity": "high",
+      "pattern": "\\b(?:(?:sent|transferred|deposited)[^.!?\\n]{0,85}(?:by\\s+mistake|wrong\\s+(?:number|account))|(?:refund|send\\s+(?:it|the\\s+money)\\s+back)[^.!?\\n]{0,45}(?:different|another|new)\\s+(?:number|account))\\b",
+      "skipNegated": false,
+      "title": "An unexpected “wrong transfer” story",
+      "detail": "Do not send money back based on a message or screenshot. Check your balance in the official banking or mobile-money app, then ask the provider to handle any reversal."
+    },
+    {
+      "id": "avoid-verification",
+      "severity": "high",
+      "pattern": "\\b(?:don['’]?t|do\\s+not|never)\\s+(?:call|contact|tell)[^.!?\\n]{0,40}\\b(?:bank|customer\\s+(?:care|service)|support|police|anyone|family)\\b",
+      "skipNegated": false,
+      "title": "Pressure not to check with anyone",
+      "detail": "Asking you to keep a money or account request secret can isolate you from help. Verify it with the real person or organisation using contact details you already trust."
+    },
+    {
+      "id": "new-number",
+      "severity": "medium",
+      "pattern": "\\b(?:new\\s+(?:phone\\s+)?number|lost\\s+my\\s+phone|phone\\s+(?:is\\s+)?broken)\\b[^.!?\\n]{0,100}\\b(?:money|pay|transfer|send|help)\\b",
+      "skipNegated": false,
+      "title": "A new identity paired with a money request",
+      "detail": "Someone claiming to be a friend or relative on a new number may be impersonating them. Call the person on their previously saved number before sending anything."
+    }
+  ],
+  "shorteners": [
+    "bit.ly",
+    "t.co",
+    "tinyurl.com",
+    "tiny.cc",
+    "is.gd",
+    "buff.ly",
+    "ow.ly",
+    "cutt.ly",
+    "rb.gy",
+    "shorturl.at",
+    "rebrand.ly",
+    "lnkd.in",
+    "goo.gl"
+  ],
+  "brands": [
+    {
+      "name": "PayPal",
+      "token": "paypal",
+      "domains": [
+        "paypal.com",
+        "paypal.me"
+      ]
+    },
+    {
+      "name": "Google",
+      "token": "google",
+      "domains": [
+        "google.com",
+        "google.org",
+        "google.co.uk",
+        "google.co.in"
+      ]
+    },
+    {
+      "name": "Microsoft",
+      "token": "microsoft",
+      "domains": [
+        "microsoft.com",
+        "microsoftonline.com",
+        "live.com"
+      ]
+    },
+    {
+      "name": "Apple",
+      "token": "apple",
+      "domains": [
+        "apple.com",
+        "icloud.com"
+      ]
+    },
+    {
+      "name": "Netflix",
+      "token": "netflix",
+      "domains": [
+        "netflix.com"
+      ]
+    },
+    {
+      "name": "WhatsApp",
+      "token": "whatsapp",
+      "domains": [
+        "whatsapp.com",
+        "whatsapp.net"
+      ]
+    },
+    {
+      "name": "Facebook",
+      "token": "facebook",
+      "domains": [
+        "facebook.com",
+        "fb.com"
+      ]
+    },
+    {
+      "name": "Instagram",
+      "token": "instagram",
+      "domains": [
+        "instagram.com"
+      ]
+    },
+    {
+      "name": "DHL",
+      "token": "dhl",
+      "domains": [
+        "dhl.com",
+        "dhl.de"
+      ]
+    }
+  ],
+  "playbook": [
+    {
+      "id": "clicked",
+      "icon": "mouse",
+      "tint": "sage",
+      "label": "I clicked a link",
+      "short": "Clicked a link",
+      "description": "Close it, then check what happened next.",
+      "title": "A click alone doesn’t tell the whole story.",
+      "intro": "Opening a link does not automatically mean an account or device is compromised. What you entered, downloaded, or allowed matters.",
+      "steps": [
+        "Close the page. Don’t enter details, accept notifications, download anything, or grant permissions.",
+        "If you entered a password, shared a code, paid, or installed something, choose that situation above for more specific steps.",
+        "Keep your browser and device updated. If something downloaded, don’t open it; delete the unexpected file and use your device’s built-in security scan if available. Review any permissions you granted.",
+        "Verify the message through a known, official channel. Report and block the sender if it is fraudulent."
+      ]
+    },
+    {
+      "id": "paid",
+      "icon": "wallet",
+      "tint": "peach",
+      "label": "I sent money",
+      "short": "Sent money",
+      "description": "Contact your bank or mobile-money provider.",
+      "title": "Contact your payment provider quickly.",
+      "intro": "A provider may be able to stop or reverse a payment, but recovery is not guaranteed. Acting promptly can help.",
+      "steps": [
+        "Use your bank or mobile-money provider’s official app or a phone number you already trust. Explain that the payment may be fraudulent.",
+        "Ask about stopping the transfer, reversing the payment, and protecting or freezing the account or card. For a gift card, contact its issuer; for a crypto transfer, contact the exchange you used.",
+        "Keep transaction IDs, dates, receipts, and screenshots privately. Do not post account numbers, PINs, codes, or personal documents publicly.",
+        "Report the incident through your provider and appropriate local fraud or police reporting channel. Do not pay anyone who promises recovery for an upfront fee."
+      ]
+    },
+    {
+      "id": "password",
+      "icon": "key",
+      "tint": "lavender",
+      "label": "I shared a password",
+      "short": "Shared a password",
+      "description": "Secure the account and any reused passwords.",
+      "title": "Take back control of the account.",
+      "intro": "Use a separate trusted device if you suspect yours is being controlled or has unsafe software installed.",
+      "steps": [
+        "Open the service’s official app or type its known address yourself. Change the exposed password immediately. Use official account recovery if you cannot sign in.",
+        "Change the password on any other account where you reused it. Prioritise your email and financial accounts.",
+        "Sign out other sessions and review recovery email addresses, phone numbers, connected apps, and recent activity. Remove changes you do not recognise.",
+        "Enable a passkey or multi-factor authentication where available. Contact official support if the account or its recovery settings were changed."
+      ]
+    },
+    {
+      "id": "code",
+      "icon": "lock",
+      "tint": "sage",
+      "label": "I shared a login code",
+      "short": "Shared a login code",
+      "description": "A one-time code may have allowed access.",
+      "title": "Treat the account as potentially exposed.",
+      "intro": "A code may have authorised a login, payment, or password reset. Waiting for it to expire does not undo that action.",
+      "steps": [
+        "Contact the service through a known official channel immediately. If the code was for a bank or mobile-money transaction, ask the provider to secure the account and review transactions.",
+        "On a trusted device, open the official app or site. Change the password if applicable and sign out unrecognised sessions.",
+        "Review payments, recovery settings, and connected devices. Follow official support or account recovery instructions.",
+        "Do not share any further codes. A new caller claiming to “fix” this may be part of the same scam."
+      ]
+    },
+    {
+      "id": "installed",
+      "icon": "download",
+      "tint": "peach",
+      "label": "I installed an app",
+      "short": "Installed an app",
+      "description": "Stop remote access and get trusted support.",
+      "title": "Limit access to the device first.",
+      "intro": "An unexpected installer or remote-support app can put personal information at risk. The right cleanup depends on your device.",
+      "steps": [
+        "If you suspect someone is actively controlling the device, disconnect it from Wi-Fi, mobile data, and other networks. Stop any remote-support session.",
+        "Use a separate trusted device to contact your financial providers if sensitive information was visible. Change exposed account passwords and revoke sessions from that trusted device.",
+        "Remove unfamiliar remote-access software and permissions if you can do so safely. Use the device’s built-in security tools and install official updates.",
+        "If control persists or you are unsure, seek trusted technical help. A full device reset may be needed; removing one app does not guarantee the device is clean."
+      ]
+    },
+    {
+      "id": "impersonation",
+      "icon": "user",
+      "tint": "lavender",
+      "label": "Someone is impersonating",
+      "short": "Impersonation",
+      "description": "Verify the person using another channel.",
+      "title": "Check the person, not the profile picture.",
+      "intro": "A familiar name, voice, or photo is not enough to verify someone. Accounts can be copied or taken over.",
+      "steps": [
+        "Do not send money, codes, or documents. Pause the conversation, even if the request sounds urgent or emotional.",
+        "Call the person using a number you had saved before this message, or contact them through a separate trusted channel. For a company, use its official app or known contact details.",
+        "If your own account is being copied, warn your contacts through a trusted channel and use the platform’s impersonation reporting process. If your actual account was taken over, use official account recovery.",
+        "Save relevant evidence privately, then report and block the impersonator. If you already paid or shared a secret, choose that situation above."
+      ]
+    }
+  ]
+}

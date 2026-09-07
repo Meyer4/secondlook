@@ -12,6 +12,18 @@ A privacy-first web app that helps people take a second look at suspicious messa
 
 > **Important:** SecondLook is a local, rule-based educational tool—not an antivirus, an AI fraud detector, a threat-reputation service, or a safety certificate. False positives and missed scams are expected. “No common warning signs found” never means “safe.” English-language message patterns are the focus of version 1.
 
+## New: optional companion apps (1.1.0 preview)
+
+**[Get the companions and setup guide](https://meyer4.github.io/secondlook/companions.html)**
+
+- **Android:** user-enabled, per-app notification text checks, private local warnings, duplicate suppression, cooldowns, Share checks, passwords, and an offline playbook. No Internet permission.
+- **Desktop Chrome/Edge:** optional site access, supported link-click warnings, manual/context-menu checks, and optional rate-limited browser notifications.
+- **iPhone:** native Share/check/password/playbook source plus Safari extension source. Apple signing is needed; this is not a browser-installable iOS app or an App Store release.
+
+These do **not** read every private message or intercept every link. No physical-device battery measurement or universal coverage is claimed. Read **[the companion documentation](companions/README.md)** and **[verification status](companions/VERIFICATION.md)** before installing a preview.
+
+[![Companion verification](https://github.com/Meyer4/secondlook/actions/workflows/companions.yml/badge.svg)](https://github.com/Meyer4/secondlook/actions/workflows/companions.yml)
+
 ## What is included
 
 | Tool | What it does |
@@ -84,6 +96,10 @@ site/
   app.js                     UI state, navigation, clipboard and checklist
   lib/scanner.js             Pure local message and URL checks
   lib/passwords.js           Cryptographic password generation
+  lib/playbook.js            Shared offline incident guidance
+  companions.html            Companion downloads and honest setup limits
+companions/                  Android, desktop browser, and iPhone/Safari projects
+shared/                      Exported native rules and 30 common test vectors
   sw.js                      Scoped offline asset cache
   manifest.webmanifest       Installable web-app metadata
   assets/                    Local font, icons, and font licence

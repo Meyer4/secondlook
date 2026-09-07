@@ -1,9 +1,9 @@
 /* The worker caches app assets only. The app never fetches submitted links. */
 const CACHE_PREFIX = 'secondlook:' + self.registration.scope + ':';
-const CACHE_NAME = CACHE_PREFIX + 'v1';
+const CACHE_NAME = CACHE_PREFIX + 'v2';
 const ASSETS = [
-  './', './index.html', './styles.css', './app.js', './lib/scanner.js', './lib/passwords.js',
-  './manifest.webmanifest', './assets/favicon.svg', './assets/icon-192.png',
+  './', './index.html', './styles.css', './app.js', './lib/scanner.js', './lib/passwords.js', './lib/playbook.js',
+  './companions.html', './companions.css', './manifest.webmanifest', './assets/favicon.svg', './assets/icon-192.png',
   './assets/icon-512.png', './assets/manrope-variable.ttf',
 ];
 self.addEventListener('install', event => {

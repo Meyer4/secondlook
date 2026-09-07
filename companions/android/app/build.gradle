@@ -1,0 +1,19 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'io.github.meyer4.secondlook'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'io.github.meyer4.secondlook'
+        minSdk 26
+        targetSdk 36
+        versionCode 110
+        versionName '1.1.0-preview'
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    buildTypes { release { minifyEnabled false } }
+    lint { abortOnError true }
+}
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20240303'
+}
