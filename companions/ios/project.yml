@@ -67,7 +67,24 @@ targets:
       - path: Shared/PrivacyInfo.xcprivacy
         buildPhase: resources
       - path: SafariExtension/SafariWebExtensionHandler.swift
-      - path: SafariExtension/Resources
+      # Keep manifest/scripts at the iOS bundle root. A literal Resources
+      # directory can make CoreFoundation infer the wrong bundle layout.
+      - path: SafariExtension/Resources/manifest.json
+        buildPhase: resources
+      - path: SafariExtension/Resources/background.js
+        buildPhase: resources
+      - path: SafariExtension/Resources/content.js
+        buildPhase: resources
+      - path: SafariExtension/Resources/popup.html
+        buildPhase: resources
+      - path: SafariExtension/Resources/popup.css
+        buildPhase: resources
+      - path: SafariExtension/Resources/popup.js
+        buildPhase: resources
+      - path: SafariExtension/Resources/core
+        type: folder
+        buildPhase: resources
+      - path: SafariExtension/Resources/icons
         type: folder
         buildPhase: resources
     info:
