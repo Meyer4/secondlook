@@ -1,4 +1,4 @@
-# SecondLook companions — 1.1.0 preview
+# SecondLook companions — 1.3.0 Prism preview
 
 **More convenient, not all-seeing.** The website cannot monitor other apps or grant itself operating-system permissions. These are separate, optional installations.
 
@@ -18,7 +18,7 @@ The iPhone Share extension receives only content explicitly supplied to it by a 
 
 Open **https://meyer4.github.io/secondlook/companions.html** for the packages and setup guide once the updated Pages deployment succeeds.
 
-- **Android:** `secondlook-android-preview.apk` is a debug/test-signed preview, not a Play Store release. Review permissions and use a test device first. Do not disable Play Protect or Android’s sensitive-content protections. A later debug build can use another key and require uninstalling this preview.
+- **Android:** `secondlook-android-preview.apk` is a non-debuggable, preview-signed build, not a Play Store release. Review permissions and use a test device first. Do not disable Play Protect or Android’s sensitive-content protections. Version 1.2 installs as a separate SecondLook Preview app. Configure it again, and pause the older installation to avoid duplicate warnings. Owner-controlled production signing is still required for a normal long-term update path.
 - **Chrome/Edge:** extract `secondlook-browser-extension.zip`, open `chrome://extensions` or `edge://extensions`, enable Developer mode, and choose **Load unpacked** on the folder containing `manifest.json`. This is not a store-verified installation.
 - **iPhone:** `secondlook-ios-project.zip` is source, not an IPA. Generate/open the Xcode project and use appropriate Apple signing to install on a device. Public App Store/TestFlight distribution is not performed here.
 - **Safari resources:** `secondlook-safari-extension.zip` contains the web-extension resources with its Safari manifest. Apple also documents an App Store Connect packaging/distribution route; availability, account requirements, review, and privacy disclosures still apply. [2](https://developer.apple.com/documentation/safariservices/packaging-and-distributing-safari-web-extensions-with-app-store-connect)
@@ -94,7 +94,7 @@ Android:
 ```bash
 cd companions/android
 # Android SDK 36 + build-tools 36.0.0, JDK 21 (17+ supported by AGP), network for build dependencies
-./gradlew :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
+./gradlew :app:testDebugUnitTest :app:assemblePreview :app:lintPreview
 ```
 
 The app itself does not require a network connection. The Gradle wrapper is checksum-pinned; development dependencies are fetched only by build tooling.
@@ -120,3 +120,11 @@ The `Verify companion apps` GitHub Actions workflow tests the browser extension 
 6. Keep detection claims modest. These are heuristic aids, not malware scanners or a guarantee that a person, site, or request is legitimate.
 
 Project code: MIT. System framework icons stay within their respective platform apps; bundled project icons are original SecondLook artwork.
+
+## Design and hardening review
+
+Version 1.2 introduces a coordinated Android/web design and specific input, build, and workflow hardening. Read [the focused security review](../docs/SECURITY-REVIEW-1.2.md). It is not an independent audit or a promise of complete protection.
+
+## Prism appearance controls
+
+Version 1.3 replaces the green-heavy draft with complete light/dark palettes and optional visual motion. Android animates only its visible foreground interface; notification checks remain event-driven. The web backdrop is decorative, not a live threat feed. See [the Prism notes](../docs/PRISM-1.3.md).

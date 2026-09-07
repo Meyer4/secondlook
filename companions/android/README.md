@@ -4,7 +4,7 @@ This is a small native Java app with no runtime library dependency and **no Inte
 
 ## Setup on your own test phone
 
-1. Review the source and the powerful notification-access permission before installing the debug/test APK.
+1. Review the source and the powerful notification-access permission before installing the non-debuggable, preview-signed APK.
 2. Allow SecondLook to post warning notifications.
 3. Read the disclosure and, if you consent, enable SecondLook in Android’s Notification access settings.
 4. Select apps. **The initial allowlist is empty.**
@@ -26,13 +26,19 @@ No message body or generated password is stored. Settings/selected package names
 First run `npm run sync:companions` from the repository root. Then, with JDK 21, Android SDK 36, and build-tools 36.0.0 installed:
 
 ```bash
-./gradlew :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
+./gradlew :app:testDebugUnitTest :app:assemblePreview :app:lintPreview
 ```
 
-Output: `app/build/outputs/apk/debug/app-debug.apk`.
+Output: `app/build/outputs/apk/preview/app-preview.apk`.
 
 The wrapper distribution is checksum-pinned. The wrapper itself is third-party Gradle code under its included Apache-2.0 licence (`gradle/wrapper/LICENSE.txt`); the SecondLook app source is MIT.
 
 ## Before distributing beyond a preview
 
-Use an owner-controlled production signing key and complete store/privacy/permission reviews. The included debug APK and CI debug builds may have different signing keys; updates may require uninstalling an earlier preview. Never commit signing keys or bypass device security controls. Real phones, OEM battery restrictions, notification redaction, permission revocation, foreground chats, and app variants still need manual testing. No physical-device battery result is claimed.
+Use an owner-controlled production signing key and complete store/privacy/permission reviews. Version 1.3 is a separately identified SecondLook Preview app, so it can be installed alongside the earlier 1.1 app. It is not an in-place update. Configure its permissions and app selections again, and disable the older listener to avoid duplicate alerts. Preview signing keys are not a production update-continuity solution. Never commit signing keys or bypass device security controls. Real phones, OEM battery restrictions, notification redaction, permission revocation, foreground chats, and app variants still need manual testing. No physical-device battery result is claimed.
+
+## Version 1.3 design and hardening
+
+The app now has five organised screens, a native bottom navigation bar, Prism backgrounds with optional foreground-only motion, local Manrope typography, and real permission/selection status. Robolectric native-graphics renders exercise the actual Android views; they are not photographs of a physical device. The Manrope font uses its included SIL Open Font License in `app/src/main/assets/Manrope-OFL.txt`. See `docs/SECURITY-REVIEW-1.2.md` at the repository root for the focused review and its limitations.
+
+The header Light/Dark switch and Settings appearance picker preserve current text and passwords. The Live background switch can disable visual motion, and Android’s Remove animations setting is respected. The prior temporary-key 1.2 preview may need removal if its signature differs; never disable Android security controls to force an install.

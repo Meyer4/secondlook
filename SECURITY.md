@@ -57,3 +57,7 @@ Reports about missed patterns or false positives should use **fictional or thoro
 ## Companion preview security
 
 Version 1.1 adds separate opt-in companions; see [their threat boundaries](companions/README.md) and [verification record](companions/VERIFICATION.md). A notification listener, DOM overlay, or Share extension is not universal interception. Preview APKs are debug/test-signed, not production-signed or store-reviewed. No signing secrets are included. Establish owner-controlled signing and independently review the implementation before distributing it as a mature security product.
+
+## 1.2 focused review
+
+See [the design/hardening review](docs/SECURITY-REVIEW-1.2.md) for specific changes, test scope, non-debuggable preview verification, signing migration, and remaining trust boundaries. This supersedes the 1.1 debug-APK description for the new preview variant; it does not turn a preview into a store-reviewed production release.

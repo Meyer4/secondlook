@@ -23,6 +23,7 @@ public final class SecondLookListener extends NotificationListenerService {
     @Override public void onListenerDisconnected() { connected=false; }
     @Override public void onDestroy() { connected=false;if(worker!=null)worker.shutdownNow();super.onDestroy(); }
     @Override public void onNotificationPosted(StatusBarNotification sbn) {
+        try {
         if(sbn==null||sbn.getPackageName().equals(getPackageName()))return;
         android.content.SharedPreferences prefs=SecondLookApp.prefs(this);
         if(!prefs.getBoolean("enabled",false))return;
@@ -35,23 +36,9 @@ public final class SecondLookListener extends NotificationListenerService {
         if(!policy.accept(sbn.getPackageName(),sbn.getKey(),text,now))return;
         final String source=sbn.getPackageName();
         try { worker.execute(() -> checkAndWarn(source,text)); } catch(RejectedExecutionException ignored) { /* Bounded burst handling: no background retry loop. */ }
+        } catch(RuntimeException malformedNotification) { /* Ignore unreadable framework input; never log it. */ }
     }
-    static String extractText(Notification notification) {
-        LinkedHashSet<String> pieces=new LinkedHashSet<>();Bundle extras=notification.extras;
-        if(extras==null)return "";
-        android.os.Parcelable[] messages=extras.getParcelableArray(Notification.EXTRA_MESSAGES);
-        if(messages!=null)for(int i=Math.max(0,messages.length-3);i<messages.length;i++) {
-            if(messages[i] instanceof Bundle) {CharSequence value=((Bundle)messages[i]).getCharSequence("text");if(value!=null)pieces.add(value.toString());}
-        }
-        if(pieces.isEmpty()) {
-            CharSequence big=extras.getCharSequence(Notification.EXTRA_BIG_TEXT);
-            CharSequence small=extras.getCharSequence(Notification.EXTRA_TEXT);
-            if(big!=null)pieces.add(big.toString());else if(small!=null)pieces.add(small.toString());
-        }
-        StringBuilder text=new StringBuilder();
-        for(String piece:pieces) { if(text.length()>0)text.append('\n');int available=SafetyEngine.MAX_TEXT-text.length();if(available<=0)break;text.append(piece,0,Math.min(piece.length(),available)); }
-        return text.toString();
-    }
+    static String extractText(Notification notification) { return NotificationText.extract(notification); }
     private void checkAndWarn(String source,String text) {
         android.content.SharedPreferences prefs=SecondLookApp.prefs(this);
         // Re-check controls after a queued task, so pausing stops pending analysis.
@@ -74,6 +61,8 @@ public final class SecondLookListener extends NotificationListenerService {
             Notification warning=new Notification.Builder(this,SecondLookApp.CHANNEL).setSmallIcon(R.drawable.ic_notification).setContentTitle("SecondLook: pause before you act")
                 .setContentText(label+" · "+titles.size()+" warning signs. Tap for next steps.").setContentIntent(open).setAutoCancel(true)
                 .setCategory(Notification.CATEGORY_RECOMMENDATION).setVisibility(Notification.VISIBILITY_PRIVATE).setPublicVersion(publicVersion).setOnlyAlertOnce(false).build();
+            // Re-check immediately before posting, including permission/selection changes.
+            if(!prefs.getBoolean("enabled",false)||!prefs.getStringSet("apps",Collections.emptySet()).contains(source))return;
             manager.notify(source.hashCode(),warning);
         }catch(Exception ignored) { /* Never log message bodies or private links. A check may be missed. */ }
     }

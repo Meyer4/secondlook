@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "SecondLook for Safari",
-  "version": "1.1.0",
-  "version_name": "1.1.0 preview",
+  "version": "1.3.0",
+  "version_name": "1.3.0 Prism preview",
   "description": "Private, offline warnings for common warning signs in supported webpage links. Not a safety guarantee.",
   "permissions": [
     "storage",

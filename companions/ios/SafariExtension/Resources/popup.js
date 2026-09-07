@@ -5,6 +5,18 @@ const isSafari = api.runtime.getManifest().name.includes('Safari');
 const defaults = { enabled: false, sensitivity: 'balanced', browserWarnings: false };
 const q = selector => document.querySelector(selector);
 const node = (tag, text, className) => { const element = document.createElement(tag); if (text !== undefined) element.textContent = text; if (className) element.className = className; return element; };
+
+// Appearance is a local display preference, never scan history.
+let extensionDark = matchMedia('(prefers-color-scheme: dark)').matches;
+try { const savedAppearance = await api.storage.local.get('appearance'); if (['light','dark'].includes(savedAppearance.appearance)) extensionDark = savedAppearance.appearance === 'dark'; } catch {}
+function showExtensionTheme() {
+  document.documentElement.dataset.theme = extensionDark ? 'dark' : 'light';
+  const button = q('#extension-theme'); button.textContent = extensionDark ? 'Light' : 'Dark';
+  button.setAttribute('aria-label',extensionDark ? 'Switch to light mode' : 'Switch to dark mode');
+}
+showExtensionTheme();
+q('#extension-theme').addEventListener('click',async()=>{ extensionDark = !extensionDark; showExtensionTheme(); await api.storage.local.set({appearance:extensionDark ? 'dark':'light'}); });
+
 let noticeTimer;
 let activeOrigin = null;
 try { const [tab] = await api.tabs.query({ active: true, currentWindow: true }); const url = new URL(tab.url); if (['http:','https:'].includes(url.protocol)) activeOrigin = url.origin; } catch {}

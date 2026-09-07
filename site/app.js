@@ -1,3 +1,4 @@
+import { bootVisuals } from './visuals.js';
 import { INCIDENTS } from './lib/playbook.js';
 import { scanMessage, inspectLink, suggestedActions } from './lib/scanner.js';
 import { generatePassword } from './lib/passwords.js';
@@ -398,6 +399,7 @@ window.addEventListener('hashchange', () => route());
 renderExamples();
 route(true);
 selectIncident('clicked');
+bootVisuals();
 
 let deferredInstall;
 window.addEventListener('beforeinstallprompt', event => {

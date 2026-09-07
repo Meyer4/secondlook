@@ -12,7 +12,7 @@ test('loads with functional navigation and no browser errors', async ({ page }) 
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await openApp(page);
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Pause. Check.');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Your digital life.');
   await page.locator('[data-nav="passwords"]').click();
   await expect(page).toHaveURL(/#passwords$/);
   await expect(page.locator('#generated-password')).not.toHaveValue('');

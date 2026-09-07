@@ -26,12 +26,12 @@ page = re.sub(
     page,
 )
 font = base64.b64encode((SITE / 'assets/manrope-variable.ttf').read_bytes()).decode()
-css = (SITE / 'styles.css').read_text().replace('./assets/manrope-variable.ttf', 'data:font/ttf;base64,' + font)
+css = ((SITE / 'styles.css').read_text() + '\n' + (SITE / 'prism.css').read_text()).replace('./assets/manrope-variable.ttf', 'data:font/ttf;base64,' + font)
 favicon = base64.b64encode((SITE / 'assets/favicon.svg').read_bytes()).decode()
 page = page.replace('</head>', '<link rel="icon" href="data:image/svg+xml;base64,' + favicon + '">\n<style>\n' + css + '\n</style>\n</head>')
 
 sources = []
-for relative in ['lib/scanner.js', 'lib/passwords.js', 'lib/playbook.js', 'app.js']:
+for relative in ['lib/scanner.js', 'lib/passwords.js', 'lib/playbook.js', 'visuals.js', 'app.js']:
     source = (SITE / relative).read_text()
     source = re.sub(r'^import\s+.*?;\s*$', '', source, flags=re.MULTILINE)
     source = re.sub(r'^export\s+', '', source, flags=re.MULTILINE)

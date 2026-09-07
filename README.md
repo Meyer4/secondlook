@@ -12,7 +12,7 @@ A privacy-first web app that helps people take a second look at suspicious messa
 
 > **Important:** SecondLook is a local, rule-based educational tool—not an antivirus, an AI fraud detector, a threat-reputation service, or a safety certificate. False positives and missed scams are expected. “No common warning signs found” never means “safe.” English-language message patterns are the focus of version 1.
 
-## New: optional companion apps (1.1.0 preview)
+## New: optional companion apps (1.3.0 Prism preview)
 
 **[Get the companions and setup guide](https://meyer4.github.io/secondlook/companions.html)**
 
@@ -23,6 +23,18 @@ A privacy-first web app that helps people take a second look at suspicious messa
 These do **not** read every private message or intercept every link. No physical-device battery measurement or universal coverage is claimed. Read **[the companion documentation](companions/README.md)** and **[verification status](companions/VERIFICATION.md)** before installing a preview.
 
 [![Companion verification](https://github.com/Meyer4/secondlook/actions/workflows/companions.yml/badge.svg)](https://github.com/Meyer4/secondlook/actions/workflows/companions.yml)
+
+## 1.3 Prism: depth, colour, and a choice of light or dark
+
+The Android app and web dashboard now share a multicolour Prism design: violet, cyan, blue, and rose; dimensional glass-eye graphics; optional live backgrounds; and working light/dark modes. The approved layout, local typography, and organised navigation remain. Android shows actual setup state—not a fabricated “security score”. Read the [Prism design and verification notes](docs/PRISM-1.3.md).
+
+The distributable Android preview is non-debuggable and uses a separate preview package identity. It is not an in-place update for the original temporary-key APK. Review the installation notes before enabling both versions.
+
+<p><img src="docs/design-1.3/android-home-light.png" width="260" alt="Android dashboard, rendered from the native view tree"> <img src="docs/design-1.3/android-home-dark.png" width="260" alt="Android dark dashboard, rendered from the native view tree"></p>
+
+*Native-graphics test renders, not physical-device screenshots.*
+
+[Read the focused security review](docs/SECURITY-REVIEW-1.2.md): bounded/malformed native input handling, real-user browser activation, restrictive client CSP, least-privilege deployment, SHA-pinned Actions, regression tests, and configured code scanning. **No unhackable, independent-audit, or zero-vulnerability claim is made.**
 
 ## What is included
 

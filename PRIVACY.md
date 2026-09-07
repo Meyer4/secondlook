@@ -36,3 +36,7 @@ This policy describes the supplied version 1 implementation. If an owner adds a 
 ## Optional companion apps
 
 The Android, Chrome/Edge, and iPhone/Safari previews have distinct permission models. They are separate installations, not background powers added to the website. Read [companions/README.md](companions/README.md) for the allowlist defaults, in-memory deduplication, transient reports, native settings, clipboard controls, and platform limits. No companion is designed to upload input or keep message/browsing history. Device software, browsers, stores, and hosting providers have their own policies.
+
+## Display preferences in Prism 1.3
+
+The web toolkit additionally stores theme/motion choices under `secondlook:appearance:v1`, without check inputs. Android and browser companions save display preferences alongside their existing non-sensitive controls. The iPhone container source uses UserDefaults for appearance; its Share extension follows system appearance. Visual motion is decorative, capped, and suspended when inactive or reduced motion is requested. No message or browsing history is introduced.

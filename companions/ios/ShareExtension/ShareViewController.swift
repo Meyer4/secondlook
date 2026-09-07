@@ -44,6 +44,6 @@ private struct ShareScreen: View {
                 if unsupported { Text("This share did not include readable text or a link. Images and attachments are not scanned. You can paste text below.").font(.caption).foregroundStyle(Color.slMuted).padding() }
                 CheckView(initialText: text, autoCheck: !unsupported)
             }.toolbar { ToolbarItem(placement: .topBarTrailing) { Button("Done", action: close) } }
-        }.tint(Color.slForest).preferredColorScheme(.light)
+        }.tint(Color.slForest)
     }
 }

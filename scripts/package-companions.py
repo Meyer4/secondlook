@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Package source companions and an already-built Android preview. Never package signing keys."""
+"""Package source companions and an already-built non-debuggable Android preview. Never package signing keys."""
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 import shutil
@@ -23,7 +23,7 @@ def package(directory, destination, prefix=''):
 package(ROOT/'companions/browser/extension',output/'secondlook-browser-extension.zip')
 package(ROOT/'companions/ios',output/'secondlook-ios-project.zip','SecondLook-iPhone')
 package(ROOT/'companions/ios/SafariExtension/Resources',output/'secondlook-safari-extension.zip')
-apk=ROOT/'companions/android/app/build/outputs/apk/debug/app-debug.apk'
+apk=ROOT/'companions/android/app/build/outputs/apk/preview/app-preview.apk'
 if apk.exists():shutil.copyfile(apk,output/'secondlook-android-preview.apk')
 elif not args.skip_android:raise SystemExit('Build the Android APK first. Nothing was labelled as an APK without a build.')
 files=sorted([*output.glob('*.zip'),*output.glob('*.apk')])

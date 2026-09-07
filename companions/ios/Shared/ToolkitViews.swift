@@ -4,15 +4,21 @@ import Security
 import UniformTypeIdentifiers
 
 extension Color {
-    static let slPaper = Color(red: 246/255, green: 247/255, blue: 242/255)
-    static let slForest = Color(red: 24/255, green: 46/255, blue: 39/255)
-    static let slLime = Color(red: 218/255, green: 239/255, blue: 171/255)
-    static let slMuted = Color(red: 91/255, green: 111/255, blue: 77/255)
+    private static func adaptive(_ light: (CGFloat,CGFloat,CGFloat),_ dark: (CGFloat,CGFloat,CGFloat)) -> Color {
+        Color(UIColor { traits in let rgb = traits.userInterfaceStyle == .dark ? dark : light; return UIColor(red:rgb.0/255,green:rgb.1/255,blue:rgb.2/255,alpha:1) })
+    }
+    static var slPaper: Color { adaptive((234,240,252),(12,21,48)) }
+    static var slForest: Color { adaptive((42,47,94),(224,233,255)) }
+    static var slLime: Color { adaptive((222,218,251),(65,70,118)) }
+    static var slMuted: Color { adaptive((88,101,134),(183,198,225)) }
+    static var slCard: Color { adaptive((251,252,255),(25,41,73)) }
+    static var slAccent: Color { adaptive((99,87,204),(173,194,255)) }
 }
+
 struct SLCard<Content: View>: View {
     let content: Content
     init(@ViewBuilder content: () -> Content) { self.content = content() }
-    var body: some View { VStack(alignment: .leading, spacing: 14) { content }.frame(maxWidth: .infinity, alignment: .leading).padding(20).background(.white).clipShape(RoundedRectangle(cornerRadius: 18)).overlay(RoundedRectangle(cornerRadius: 18).stroke(Color.slMuted.opacity(0.17))) }
+    var body: some View { VStack(alignment: .leading, spacing: 14) { content }.frame(maxWidth: .infinity, alignment: .leading).padding(20).background(Color.slCard).clipShape(RoundedRectangle(cornerRadius: 18)).overlay(RoundedRectangle(cornerRadius: 18).stroke(Color.slMuted.opacity(0.17))) }
 }
 struct SLHeader: View {
     let eyebrow: String
@@ -49,7 +55,7 @@ struct CheckView: View {
                     TextEditor(text: $text).frame(minHeight: 150).scrollContentBackground(.hidden).padding(10).background(Color.slPaper).clipShape(RoundedRectangle(cornerRadius: 10)).autocorrectionDisabled().textInputAutocapitalization(.never).privacySensitive().accessibilityLabel("Text to check")
                     Text("\(text.utf16.count) / \(isLink ? 4096 : 12000) characters").font(.caption).foregroundStyle(Color.slMuted)
                     HStack { PasteButton(payloadType: String.self) { strings in text = strings.first ?? "" }.buttonBorderShape(.roundedRectangle); Spacer(); Button("Clear") { text = ""; result = nil; error = nil } }
-                    Button(action: analyse) { Text(isLink ? "Inspect this link →" : "Check this message →").fontWeight(.semibold).frame(maxWidth: .infinity).padding(8) }.buttonStyle(.borderedProminent).tint(Color.slForest)
+                    Button(action: analyse) { Text(isLink ? "Inspect this link →" : "Check this message →").fontWeight(.semibold).frame(maxWidth: .infinity).padding(8) }.buttonStyle(.borderedProminent).tint(Color(red:0.39,green:0.35,blue:0.82)).foregroundStyle(Color.white)
                     if let error { Text(error).font(.subheadline).foregroundStyle(.red).accessibilityLabel("Error: " + error) }
                 }
                 if let result {
@@ -65,7 +71,7 @@ struct CheckView: View {
                 }
                 Text("English-first patterns. No live reputation lookup, redirects, file scans, or website visits. Native and browser parsers can differ. No result guarantees safety.").font(.caption).foregroundStyle(Color.slMuted)
             }.padding(22)
-        }.background(Color.slPaper).foregroundStyle(Color.slForest).tint(Color.slForest)
+        }.background(Color.slPaper).foregroundStyle(Color.slForest).tint(Color.slAccent)
         .onChange(of: text) { _ in result = nil; error = nil }
         .onChange(of: isLink) { _ in result = nil; error = nil }
         .onAppear { if autoCheck && !text.isEmpty { analyse() } }
@@ -87,7 +93,7 @@ struct PlaybookView: View {
                 }
                 Text("Use support contacts you already trust. Recovery is not guaranteed. Be careful of anyone demanding an upfront fee to recover lost funds.").font(.caption).foregroundStyle(Color.slMuted)
             }.padding(22)
-        }.background(Color.slPaper).foregroundStyle(Color.slForest).tint(Color.slForest)
+        }.background(Color.slPaper).foregroundStyle(Color.slForest).tint(Color.slAccent)
     }
 }
 enum NativePasswordMaker {
@@ -118,7 +124,7 @@ struct PasswordView: View {
                 Text("Make a long, unique password and save it in a password manager. SecondLook does not keep a password history.").font(.subheadline).foregroundStyle(Color.slMuted)
                 Text(password.isEmpty ? "Generate a password below" : password).font(.system(.title3, design: .monospaced)).textSelection(.enabled).privacySensitive().frame(maxWidth: .infinity, alignment: .leading).padding(16).background(Color.slLime.opacity(0.5)).clipShape(RoundedRectangle(cornerRadius: 12))
                 Stepper("\(length) characters", value: $length, in: 12...40)
-                Button("Generate another", action: generate).buttonStyle(.borderedProminent).tint(Color.slForest)
+                Button("Generate another", action: generate).buttonStyle(.borderedProminent).tint(Color(red:0.39,green:0.35,blue:0.82)).foregroundStyle(Color.white)
                 Button("Copy password") {
                     UIPasteboard.general.setItems([[UTType.utf8PlainText.identifier: password]], options: [.localOnly: true, .expirationDate: Date().addingTimeInterval(60)])
                     status = "Copied locally. The clipboard item is set to expire after one minute; other apps may read it before then."
@@ -126,7 +132,7 @@ struct PasswordView: View {
                 if !status.isEmpty { Text(status).font(.caption).foregroundStyle(Color.slMuted) }
             }
             Text("Generated using Apple’s secure random API with unbiased selection. No network, timers, or background password processing.").font(.caption).foregroundStyle(Color.slMuted)
-        }.padding(22) }.background(Color.slPaper).foregroundStyle(Color.slForest).tint(Color.slForest).onAppear { if password.isEmpty { generate() } }.onChange(of: length) { _ in generate() }
+        }.padding(22) }.background(Color.slPaper).foregroundStyle(Color.slForest).tint(Color.slAccent).onAppear { if password.isEmpty { generate() } }.onChange(of: length) { _ in generate() }
     }
     private func generate() { do { password = try NativePasswordMaker.generate(length: length); status = "" } catch { password = ""; status = error.localizedDescription } }
 }

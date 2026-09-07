@@ -350,7 +350,9 @@ function warnBeforeNavigation(anchor, event, href, result) {
   }
 }
 function inspectActivation(event) {
-  if (!guardSettings.enabled || event.defaultPrevented || ![0, 1].includes(event.button)) return;
+  // Restrict interruptions to real user activation. Synthetic page clicks
+  // must not be able to repeatedly spawn warnings or OS notifications.
+  if (!event.isTrusted || !guardSettings.enabled || event.defaultPrevented || ![0, 1].includes(event.button)) return;
   if (event.type === 'auxclick' && event.button !== 1) return;
   const anchor = event.composedPath().find(element => element instanceof HTMLAnchorElement || element instanceof HTMLAreaElement);
   if (!anchor || bypass.has(anchor) || !anchor.href) return;

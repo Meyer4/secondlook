@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { MESSAGE_RULES, SHORTENERS, BRAND_DOMAINS, scanMessage, inspectLink } from '../site/lib/scanner.js';
 import { INCIDENTS } from '../site/lib/playbook.js';
 const root=fileURLToPath(new URL('../',import.meta.url));
-const rules={ version:'1.1.0', messageRules:MESSAGE_RULES.map(rule=>({id:rule.id,severity:rule.severity,pattern:rule.pattern.source,skipNegated:Boolean(rule.skipNegated),title:rule.title,detail:rule.detail})),shorteners:[...SHORTENERS],brands:BRAND_DOMAINS,playbook:INCIDENTS };
+const rules={ version:'1.3.0', messageRules:MESSAGE_RULES.map(rule=>({id:rule.id,severity:rule.severity,pattern:rule.pattern.source,skipNegated:Boolean(rule.skipNegated),title:rule.title,detail:rule.detail})),shorteners:[...SHORTENERS],brands:BRAND_DOMAINS,playbook:INCIDENTS };
 const cases=[
  ['message','Meet me at the library at three.'],['message','Please send me your OTP.'],['message','Never share your OTP with anyone.'],['message','Do not send your password to a stranger.'],['message','Never share your OTP. Please send your OTP to us.'],
  ['message','Please pay a redelivery fee today.'],['message','I sent money to your account by mistake. Don’t call customer care.'],['message','Please buy gift cards to pay this fine.'],['message','Double your money with guaranteed profit.'],['message','Install AnyDesk to fix your bank account.'],['message','Please reply immediately about class.'],['message','Please enter your card details here.'],['message','This is my new number and I need money.'],['message','Please look at https://paypal.com@wrong.example/account'],

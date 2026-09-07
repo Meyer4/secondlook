@@ -2,6 +2,7 @@ import SwiftUI
 
 @main
 struct SecondLookApp: App {
+    @AppStorage("secondlookAppearance") private var appearance = "system"
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -9,14 +10,16 @@ struct SecondLookApp: App {
                 CheckView().tabItem { Label("Check", systemImage: "text.magnifyingglass") }
                 PasswordView().tabItem { Label("Passwords", systemImage: "key") }
                 PlaybookView().tabItem { Label("Playbook", systemImage: "book") }
-            }.tint(Color.slForest).preferredColorScheme(.light)
+            }.tint(Color.slAccent).preferredColorScheme(appearance == "dark" ? .dark : appearance == "light" ? .light : nil)
         }
     }
 }
 struct CompanionHome: View {
+    @AppStorage("secondlookAppearance") private var appearance = "system"
     var body: some View {
         ScrollView { VStack(alignment: .leading, spacing: 20) {
             SLHeader(eyebrow: "iPhone companion · preview", title: "A safer next step.")
+            Picker("Appearance",selection:$appearance) { Text("Light").tag("light"); Text("Dark").tag("dark"); Text("System").tag("system") }.pickerStyle(.segmented)
             SLCard {
                 Label("On-demand checks. No message monitoring.", systemImage: "hand.raised").font(.headline)
                 Text("iPhone apps cannot read notifications or private conversations from other apps. SecondLook only checks text or links you choose to share, plus supported Safari link clicks after you grant extension access.").foregroundStyle(Color.slMuted)

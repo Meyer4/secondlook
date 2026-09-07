@@ -72,3 +72,12 @@ test('scripted non-link navigation is explicitly outside the guard',async({},tes
   const {context,worker}=await extension(testInfo);await worker.evaluate(()=>chrome.storage.local.set({enabled:true}));
   const {page}=await fixture(context);await page.locator('#script').click();await expect(page).toHaveURL('https://ordinary.example/scripted');await context.close();
 });
+
+// Synthetic navigation is outside the guard; it cannot repeatedly manufacture
+// warning overlays or system notifications without a user's real activation.
+test('synthetic page clicks do not manufacture warning overlays',async({},testInfo)=>{
+  const {context,worker}=await extension(testInfo);await worker.evaluate(()=>chrome.storage.local.set({enabled:true}));
+  const {page}=await fixture(context);await page.locator('#risk').evaluate(anchor=>anchor.click());
+  await expect(page).toHaveURL(/wrong\.example\/account/);
+  await expect(page.locator('[data-secondlook-warning]')).toHaveCount(0);await context.close();
+});
