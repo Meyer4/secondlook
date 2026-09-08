@@ -35,7 +35,7 @@ The wrapper distribution is checksum-pinned. The wrapper itself is third-party G
 
 ## Before distributing beyond a preview
 
-Use an owner-controlled production signing key and complete store/privacy/permission reviews. Version 1.3 is a separately identified SecondLook Preview app, so it can be installed alongside the earlier 1.1 app. It is not an in-place update. Configure its permissions and app selections again, and disable the older listener to avoid duplicate alerts. Preview signing keys are not a production update-continuity solution. Never commit signing keys or bypass device security controls. Real phones, OEM battery restrictions, notification redaction, permission revocation, foreground chats, and app variants still need manual testing. No physical-device battery result is claimed.
+Use an owner-controlled production signing key and complete store/privacy/permission reviews. Version 1.3 shows as SecondLook but uses a separate package identity, so it can be installed alongside the earlier 1.1 app. It is not an in-place update. Configure its permissions and app selections again, and disable the older listener to avoid duplicate alerts. Preview signing keys are not a production update-continuity solution. Never commit signing keys or bypass device security controls. Real phones, OEM battery restrictions, notification redaction, permission revocation, foreground chats, and app variants still need manual testing. No physical-device battery result is claimed.
 
 ## Version 1.3 design and hardening
 

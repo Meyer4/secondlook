@@ -77,7 +77,7 @@ public final class MainActivity extends Activity {
         else if(hasAccess())reconnect();
     }
     private void reconnect(){try{NotificationListenerService.requestRebind(new ComponentName(this,SecondLookListener.class));}catch(RuntimeException ignored){toast("Review notification access in Android settings.");}}
-    private void openSettings(Intent intent){try{startActivity(intent);}catch(RuntimeException unavailable){toast("This settings screen is not available. Open SecondLook Preview’s app settings in Android.");}}
+    private void openSettings(Intent intent){try{startActivity(intent);}catch(RuntimeException unavailable){toast("This settings screen is not available. Open SecondLook’s app settings in Android.");}}
 
     private void home(){
         LinearLayout root=screen("home");NativeUi.eyebrow(root,"YOUR EVERYDAY SAFETY SPACE");NativeUi.space(root,11);
