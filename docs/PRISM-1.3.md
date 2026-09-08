@@ -39,6 +39,6 @@ The current iPhone source still requires a fresh macOS/Xcode build check and App
 
 ## Installation notes
 
-The APK is a preview-signed, non-debuggable **SecondLook Preview** app (`io.github.meyer4.secondlook.preview`), not a Google Play release. It can coexist with the original 1.1 app. Configure its permissions and app choices; disable the old listener to prevent duplicate alerts.
+The APK is a preview-signed, non-debuggable build shown as **SecondLook** (package `io.github.meyer4.secondlook.preview`), not a Google Play release. It can coexist with the original 1.1 app. Configure its permissions and app choices; disable the old listener to prevent duplicate alerts.
 
 If you installed a previous workspace-only 1.2 preview, its temporary signing key may differ. Remove that preview if Android reports a signature conflict. Do not disable Play Protect or sensitive-notification protections. Owner-controlled production signing is still needed for a normal long-term update path.
